@@ -1,10 +1,11 @@
 <div>
   <div>
     @if (selected) {
-    <div *ngIf="selected">
-      <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
-    </div>
+      <div *ngIf="selected">
+        <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+      </div>
     }
+
     <table>
       <thead>
         <tr>
@@ -12,22 +13,33 @@
           <th>Imagen</th>
           <th>Porciones</th>
           <th>Tiempo</th>
+          <th>Detalle</th>
         </tr>
       </thead>
+
       <tbody>
-        @for(recipe of recipes; track recipe.id){
-        <tr (click)="onSelect(recipe)">
-          <td>{{ recipe.nombre }}</td>
-          <td>
-            <img
-              class="recipe-img"
-              [src]="recipe.imagen"
-              alt="{{ recipe.imagen }}"
-            />
-          </td>
-          <td>{{ recipe.porciones }}</td>
-          <td>{{ recipe.tiempo_minutos }} min</td>
-        </tr>
+        @for (recipe of recipes; track recipe.id) {
+          <!-- ⭐ Fila completa abre la ruta -->
+          <tr [routerLink]="['/recipe', recipe.id]">
+
+            <td>{{ recipe.nombre }}</td>
+
+            <td>
+              <img
+                class="recipe-img"
+                [src]="recipe.imagen"
+                alt="{{ recipe.imagen }}"
+              />
+            </td>
+
+            <td>{{ recipe.porciones }}</td>
+            <td>{{ recipe.tiempo_minutos }} min</td>
+
+            <td>
+              <button [routerLink]="['/recipe', recipe.id]">Ver detalle</button>
+            </td>
+
+          </tr>
         }
       </tbody>
     </table>
