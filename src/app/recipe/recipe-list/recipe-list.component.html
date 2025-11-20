@@ -1,47 +1,35 @@
-<div>
-  <div>
-    @if (selected) {
-      <div *ngIf="selected">
-        <app-recipe-detail [recipe]="selectedRecipe"></app-recipe-detail>
+<div class="container mt-4">
+
+  <h2 class="text-center mb-4">Recetas uniandes</h2>
+
+  <div class="row">
+
+    @for (recipe of recipes; track recipe.id) {
+      <div class="col-md-4 mb-4">
+
+        <div class="card h-100">
+
+          <img [src]="recipe.imagen" class="card-img-top" alt="imagen" />
+
+          <div class="card-body">
+
+            <h5 class="card-title">{{ recipe.nombre }}</h5>
+
+            <p><strong>Porciones: </strong>{{ recipe.porciones }}</p>
+
+            <button
+              class="btn btn-primary"
+              [routerLink]="['/recipe', recipe.id]"
+            >
+              Ver la receta
+            </button>
+
+          </div>
+
+        </div>
+
       </div>
     }
 
-    <table>
-      <thead>
-        <tr>
-          <th>Receta</th>
-          <th>Imagen</th>
-          <th>Porciones</th>
-          <th>Tiempo</th>
-          <th>Detalle</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        @for (recipe of recipes; track recipe.id) {
-          <!-- ⭐ Fila completa abre la ruta -->
-          <tr [routerLink]="['/recipe', recipe.id]">
-
-            <td>{{ recipe.nombre }}</td>
-
-            <td>
-              <img
-                class="recipe-img"
-                [src]="recipe.imagen"
-                alt="{{ recipe.imagen }}"
-              />
-            </td>
-
-            <td>{{ recipe.porciones }}</td>
-            <td>{{ recipe.tiempo_minutos }} min</td>
-
-            <td>
-              <button [routerLink]="['/recipe', recipe.id]">Ver detalle</button>
-            </td>
-
-          </tr>
-        }
-      </tbody>
-    </table>
   </div>
 </div>
