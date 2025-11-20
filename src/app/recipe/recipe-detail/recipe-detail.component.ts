@@ -25,4 +25,16 @@ ngOnInit() {
   });
 }
 
+getIngredienteMasUsado() {
+  if (!this.recipe) return null;
+  if (!this.recipe.ingredientes || this.recipe.ingredientes.length === 0) return null;
+
+  return this.recipe.ingredientes.reduce((max: { cantidad: string }, actual: { cantidad: string }) => {
+    const maxCant = parseInt(max.cantidad, 10);
+    const actCant = parseInt(actual.cantidad, 10);
+    return actCant > maxCant ? actual : max;
+  }, this.recipe.ingredientes[0]);
+}
+
+
 }

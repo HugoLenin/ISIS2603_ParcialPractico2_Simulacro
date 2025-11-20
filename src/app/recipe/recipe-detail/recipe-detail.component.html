@@ -34,6 +34,13 @@
         }
       </ul>
 
+      <h4 class="mt-4">Ingrediente más usado</h4>
+
+<div class="alert alert-info">
+  <strong>{{ getIngredienteMasUsado().nombre }}</strong>
+  — {{ getIngredienteMasUsado().cantidad }}
+</div>
+
       <h4 class="mt-4">Pasos</h4>
       <ol>
         @for (paso of recipe.pasos; track paso) {
